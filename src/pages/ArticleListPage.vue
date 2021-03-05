@@ -1,11 +1,13 @@
 <template>
-  <TitleBar title="게시물 리스트" />  
+  <TitleBar>게시물 리스트</TitleBar>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import TitleBar from '../components/TitleBar.vue'
 
 export default defineComponent({
+  components: { TitleBar },
   name: 'AppListPage',
 })
 </script>
