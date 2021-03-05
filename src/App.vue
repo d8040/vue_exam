@@ -1,6 +1,6 @@
 <template>
-  <header class="header-bar h-40 bg-gray-100">
-    <div class="container mx-auto flex h-full">
+  <header class="header-bar h-40 bg-black">
+    <div class="container mx-auto flex h-full text-white">
       <router-link to="/" class="h-full flex items-center">
         <img class="block w-20" src="./assets/logo.png" alt="">
       </router-link>
@@ -10,12 +10,12 @@
       <nav class="header-bar__menu-box-1">
         <ul class="flex h-full">
           <li>
-            <router-link to="/" class="h-full flex items-center font-bold px-10 hover:bg-black hover:text-white">
+            <router-link to="/" class="h-full flex items-center font-bold px-10 hover:bg-white hover:text-black">
               HOME
             </router-link>
           </li>
           <li>
-            <router-link to="/article/list" class="h-full flex items-center font-bold px-10 hover:bg-black hover:text-white">
+            <router-link to="/article/list" class="h-full flex items-center font-bold px-10 hover:bg-white hover:text-black">
               ARTICLE LIST
             </router-link>
           </li>
