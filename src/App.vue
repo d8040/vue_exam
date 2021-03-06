@@ -38,7 +38,9 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="postcss">
 
+</style>
 <style>
 html, body {
   margin: 0;
@@ -48,7 +50,4 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-</style>
-<style scoped>
-
 </style>
