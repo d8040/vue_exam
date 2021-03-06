@@ -1,15 +1,14 @@
 <template>
-  <TitleBar>게시물 리스트</TitleBar>
+  <TitleBar>메인 화면</TitleBar>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'HomeMainPage',
-})
+  name: "HomeMainPage",
+});
 </script>
 
 <style scoped>
-
 </style>
