@@ -1,7 +1,7 @@
 <template>
   <div class="form-row flex">
     <div class="w-32 flex justify-center">
-      <span class="flex item-center">{{ title }}</span>
+      <span class="flex items-center">{{ title }}</span>
     </div>
     <div class="flex-grow">
       <slot></slot>
