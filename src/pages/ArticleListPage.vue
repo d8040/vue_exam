@@ -76,7 +76,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive, getCurrentInstance, onMounted } from "vue";
-import { Article } from "../dtos/";
+import { useRoute } from "vue-router";
 import { IArticle } from "../types/";
 import { MainApi } from "../apis/";
 import TitleBar from "../components/TitleBar.vue";
@@ -85,23 +85,28 @@ import axios from "axios";
 export default defineComponent({
   name: "AppListPage",
   setup() {
+    const route = useRoute();
     const mainApi: MainApi = getCurrentInstance()?.appContext.config
       .globalProperties.$mainApi;
-
-    function loadArticle() {
-      mainApi.article_list(1).then((axiosRespons) => {
-        console.log(axiosRespons.data.body.articles);
-      });
-    }
-
-    onMounted(loadArticle);
 
     const newArticleTitleElRef = ref<HTMLInputElement>();
     const newArticleBodyElRef = ref<HTMLInputElement>();
 
     const state = reactive({
-      articles: [] as Article[],
+      articles: [] as IArticle[],
     });
+
+    function loadArticles(boardId: number) {
+      mainApi.article_list(boardId).then((axiosResponse) => {
+        state.articles = axiosResponse.data.body.articles;
+      });
+    }
+
+    onMounted(() => {
+      const boardId:number = parseInt(route.query.boardId as string ?? "1");
+
+      loadArticles(boardId);
+    })
 
     function checkAndWriteArticle() {
       if (newArticleTitleElRef.value == null) {
