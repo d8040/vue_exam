@@ -75,13 +75,27 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
+import { defineComponent, ref, reactive, getCurrentInstance, onMounted } from "vue";
 import { Article } from "../dtos/";
+import { IArticle } from "../types/";
+import { MainApi } from "../apis/";
 import TitleBar from "../components/TitleBar.vue";
+import axios from "axios";
 
 export default defineComponent({
   name: "AppListPage",
   setup() {
+    const mainApi: MainApi = getCurrentInstance()?.appContext.config
+      .globalProperties.$mainApi;
+
+    function loadArticle() {
+      mainApi.article_list(1).then((axiosRespons) => {
+        console.log(axiosRespons.data.body.articles);
+      });
+    }
+
+    onMounted(loadArticle);
+
     const newArticleTitleElRef = ref<HTMLInputElement>();
     const newArticleBodyElRef = ref<HTMLInputElement>();
 
