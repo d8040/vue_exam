@@ -1,4 +1,9 @@
 {
-  "html.format.wrapLineLength": 0,
-  "vetur.format.defaultFormatter.html": "prettyhtml"
+  "prettier.printWidth": 600,
+  "prettier.requirePragma": true,
+  "prettier.resolveGlobalModules": true,
+  "prettier.requireConfig": true,
+  "prettier.useTabs": true,
+  "prettier.withNodeModules": true,
+  "prettier.vueIndentScriptAndStyle": true
 }
