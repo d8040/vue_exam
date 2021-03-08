@@ -5,9 +5,7 @@
     <div class="container mx-auto">
       <form v-on:submit.prevent="checkAndWriteArticle">
         <FormRow title="제목">
-          <input
-            ref="newArticleTitleElRef"
-            type="text"
+          <input ref="newArticleTitleElRef" type="text"
             class="form-row-input"
             placeholder="제목을 입력해 주세요."
           />
@@ -29,6 +27,10 @@
   </section>
   <section class="section section-article-list px-2">
     <div class="container mx-auto">
+      <div class="btns mt-6">
+        <router-link class="btn-info" to="/article/list?boardId=1">공지사항 게시판</router-link>
+        <router-link class="btn-info" to="/article/list?boardId=2">자유 게시판</router-link>
+      </div>
       <div
         class="mt-6"
         v-bind:key="article.id"
@@ -75,8 +77,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, getCurrentInstance, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import {
+  defineComponent,
+  ref,
+  reactive,
+  getCurrentInstance,
+  onMounted,
+  watch,
+} from "vue";
 import { IArticle } from "../types/";
 import { MainApi } from "../apis/";
 import TitleBar from "../components/TitleBar.vue";
@@ -84,8 +92,14 @@ import axios from "axios";
 
 export default defineComponent({
   name: "AppListPage",
-  setup() {
-    const route = useRoute();
+  props: {
+    boardId: {
+      type: Number,
+      required: true,
+      default: 1,
+    },
+  },
+  setup(props) {
     const mainApi: MainApi = getCurrentInstance()?.appContext.config
       .globalProperties.$mainApi;
 
@@ -103,10 +117,15 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      const boardId:number = parseInt(route.query.boardId as string ?? "1");
+      loadArticles(props.boardId);
+    });
 
-      loadArticles(boardId);
-    })
+    watch(
+      () => props.boardId,
+      (newValue, oldValue) => {
+        loadArticles(props.boardId);
+      }
+    );
 
     function checkAndWriteArticle() {
       if (newArticleTitleElRef.value == null) {
