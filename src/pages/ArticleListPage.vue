@@ -5,7 +5,9 @@
     <div class="container mx-auto">
       <form v-on:submit.prevent="checkAndWriteArticle">
         <FormRow title="제목">
-          <input ref="newArticleTitleElRef" type="text"
+          <input
+            ref="newArticleTitleElRef"
+            type="text"
             class="form-row-input"
             placeholder="제목을 입력해 주세요."
           />
@@ -28,8 +30,12 @@
   <section class="section section-article-list px-2">
     <div class="container mx-auto">
       <div class="btns mt-6">
-        <router-link class="btn-info" to="/article/list?boardId=1">공지사항 게시판</router-link>
-        <router-link class="btn-info" to="/article/list?boardId=2">자유 게시판</router-link>
+        <router-link class="btn-info" to="/article/list?boardId=1"
+          >공지사항 게시판</router-link
+        >
+        <router-link class="btn-info" to="/article/list?boardId=2"
+          >자유 게시판</router-link
+        >
       </div>
       <div
         class="mt-6"
