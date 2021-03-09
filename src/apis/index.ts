@@ -74,8 +74,10 @@ abstract class HttpClient {
 
 // 응답타입1
 interface Base__IResponseBodyType1 {
-  resultCode: string;
-  msg: string;
+  resultCode: string
+  msg: string
+  fail: boolean
+  success: boolean
 }
 
 // /usr/article/list 의 응답 타입
@@ -101,9 +103,9 @@ export interface MainApi__article_doWrite__IResponseBody extends Base__IResponse
 
 export interface MainApi__member_authKey__IResponseBody extends Base__IResponseBodyType1 {
   body: {
-    authKey: string,
-    id: number,
-    name: string,
+    authKey: string
+    id: number
+    name: string
     nickname: string
   };
 }
@@ -127,6 +129,12 @@ export class MainApi extends HttpClient {
   protected _handleResponse(axiosResponse: AxiosResponse): AxiosResponse {
     if (["F-A", "F-B"].includes(axiosResponse?.data?.resultCode)) {
       alert('로그인 후 이용해주세요.');
+
+      localStorage.removeItem("authKey");
+      localStorage.removeItem("loginedMemberId");
+      localStorage.removeItem("loginedMemberName");
+      localStorage.removeItem("loginedMemberNickname");
+
       location.replace('/member/login');
     }
 
