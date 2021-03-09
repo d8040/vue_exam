@@ -5,5 +5,8 @@
   "prettier.requireConfig": true,
   "prettier.useTabs": true,
   "prettier.withNodeModules": true,
-  "prettier.vueIndentScriptAndStyle": true
+  "prettier.vueIndentScriptAndStyle": true,
+  "prettier.insertPragma": true,
+  "prettier.jsxBracketSameLine": true,
+  "prettier.jsxSingleQuote": true
 }

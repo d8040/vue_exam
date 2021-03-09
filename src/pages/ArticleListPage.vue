@@ -38,6 +38,10 @@
 	export default defineComponent({
 		name: "AppListPage",
 		props: {
+			globalShare: {
+				type: Object,
+				required: true
+			},
 			boardId: {
 				type: Number,
 				required: true,
