@@ -59,9 +59,7 @@
 				}
 				newArticleBoardIdElRef.value.value = props.boardId + "";
 			});
-			const state = reactive({
-				articles: [] as IArticle[],
-			});
+
 			function checkAndWriteArticle() {
 				if (newArticleBoardIdElRef.value == null) {
 					return;
@@ -88,9 +86,6 @@
 					return;
 				}
 				writeArticle(parseInt(newArticleBoardIdEl.value), newArticleTitleEl.value, newArticleBodyEl.value);
-				newArticleTitleEl.value = "";
-				newArticleBodyEl.value = "";
-				newArticleTitleEl.focus();
 			}
 			function writeArticle(boardId: number, title: string, body: string) {
 				mainApi.article_doWrite(boardId, title, body).then((axiosResponse) => {
@@ -100,7 +95,6 @@
 				});
 			}
 			return {
-				state,
 				checkAndWriteArticle,
 				newArticleBoardIdElRef,
 				newArticleTitleElRef,
