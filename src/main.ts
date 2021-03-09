@@ -32,7 +32,17 @@ const globalShare: any = reactive({
     name: loginedMemberName,
     nicknam: loginedMemberNickname,
   },
-  isLogined: computed(() => globalShare.loginedMember.id !== null)
+  isLogined: computed(() => globalShare.loginedMember.id !== null),
+  logout: () => {
+    localStorage.removeItem("authKey")
+    localStorage.removeItem("loginedMemberId")
+    localStorage.removeItem("loginedMemberName")
+    localStorage.removeItem("loginedMemberNickname")
+
+    alert("로그아웃 되었습니다.")
+
+    location.replace('/member/login')
+  }
 });
 
 // MainApi 불러오기
