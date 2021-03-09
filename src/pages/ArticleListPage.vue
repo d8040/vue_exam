@@ -34,13 +34,12 @@
 	import { MainApi } from "../apis/";
 	import TitleBar from "../components/TitleBar.vue";
 	import axios from "axios";
-
 	export default defineComponent({
 		name: "AppListPage",
 		props: {
 			globalShare: {
 				type: Object,
-				required: true
+				required: true,
 			},
 			boardId: {
 				type: Number,
@@ -50,71 +49,52 @@
 		},
 		setup(props) {
 			const mainApi: MainApi = getCurrentInstance()?.appContext.config.globalProperties.$mainApi;
-
 			const newArticleTitleElRef = ref<HTMLInputElement>();
 			const newArticleBodyElRef = ref<HTMLInputElement>();
-
 			const state = reactive({
 				articles: [] as IArticle[],
 			});
-
 			function loadArticles(boardId: number) {
 				mainApi.article_list(boardId).then((axiosResponse) => {
 					state.articles = axiosResponse.data.body.articles;
 				});
 			}
-
 			onMounted(() => {
 				loadArticles(props.boardId);
 			});
-
 			watch(
 				() => props.boardId,
 				(newValue, oldValue) => {
 					loadArticles(props.boardId);
 				}
 			);
-
 			function checkAndWriteArticle() {
 				if (newArticleTitleElRef.value == null) {
 					return;
 				}
-
 				const newArticleTitleEl = newArticleTitleElRef.value;
-
 				newArticleTitleEl.value = newArticleTitleEl.value.trim();
-
 				if (newArticleTitleEl.value.length == 0) {
 					alert("제목을 입력해 주세요.");
 					newArticleTitleEl.focus();
-
 					return;
 				}
-
 				if (newArticleBodyElRef.value == null) {
 					return;
 				}
-
 				const newArticleBodyEl = newArticleBodyElRef.value;
-
 				newArticleBodyEl.value = newArticleBodyEl.value.trim();
-
 				if (newArticleBodyEl.value.length == 0) {
 					alert("내용을 입력해 주세요.");
 					newArticleBodyEl.focus();
 					return;
 				}
-
 				writeArticle(newArticleTitleEl.value, newArticleBodyEl.value);
-
 				newArticleTitleEl.value = "";
 				newArticleBodyEl.value = "";
-
 				newArticleTitleEl.focus();
 			}
-
 			function writeArticle(title: string, body: string) {}
-
 			return {
 				state,
 				checkAndWriteArticle,

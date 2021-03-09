@@ -1,20 +1,19 @@
 <template>
-  <TitleBar>메인 화면</TitleBar>
+	<TitleBar>메인 화면</TitleBar>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+	import { defineComponent } from "vue";
 
-export default defineComponent({
-  name: "HomeMainPage",
-  props: {
-    globalShare: {
-      type: Object,
-      required: true
-    }
-  },
-});
+	export default defineComponent({
+		name: "HomeMainPage",
+		props: {
+			globalShare: {
+				type: Object,
+				required: true,
+			},
+		},
+	});
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
